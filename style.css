@@ -1,0 +1,19 @@
+/* Custom scrollbar and minimal transitions */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 10px;
+}
+
+.country-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.country-card:hover {
+    transform: translateY(-5px);
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraNode | Global Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind Config for Dark Mode
+        tailwind.config = { darkMode: 'class' }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-tight">Terra<span class="text-blue-600">Node</span></h1>
+            <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:opacity-80 transition">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between">
+            <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Search for a country..." 
+                class="w-full md:w-1/3 p-3 rounded-lg border dark:bg-gray-800 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+            >
+            <select id="region-filter" class="p-3 rounded-lg border dark:bg-gray-800 dark:border-gray-700 outline-none">
+                <option value="">Filter by Region</option>
+                <option value="africa">Africa</option>
+                <option value="americas">Americas</option>
+                <option value="asia">Asia</option>
+                <option value="europe">Europe</option>
+                <option value="oceania">Oceania</option>
+            </select>
+        </div>
+
+        <div id="skeleton-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 hidden">
+            <div class="h-80 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"></div>
+            <div class="h-80 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"></div>
+            <div class="h-80 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"></div>
+            <div class="h-80 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"></div>
+        </div>
+
+        <div id="country-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            </div>
+
+        <div id="error-msg" class="hidden text-center py-20">
+            <p class="text-2xl font-semibold opacity-50">No countries found. Try another search! 🔍</p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
