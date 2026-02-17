@@ -5,33 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TerraNode | Global Explorer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Tailwind Config for Dark Mode
-        tailwind.config = { darkMode: 'class' }
-    </script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen">
 
-    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-tight">Terra<span class="text-blue-600">Node</span></h1>
-            <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:opacity-80 transition">
-                <span id="theme-icon">🌙</span>
-            </button>
+            <h1 class="text-2xl font-black tracking-tighter">TERRA<span class="text-blue-600">NODE</span></h1>
+            
+            <div class="flex items-center gap-3">
+                <button id="show-favorites" class="flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 border border-red-100 dark:border-red-900/30 transition-all hover:scale-105 active:scale-95">
+                    <span id="fav-icon">🤍</span>
+                    <span id="fav-count" class="font-bold">0</span>
+                </button>
+                <button id="theme-toggle" class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <main class="container mx-auto px-6 py-8">
-        <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between">
-            <input 
-                type="text" 
-                id="search-input" 
-                placeholder="Search for a country..." 
-                class="w-full md:w-1/3 p-3 rounded-lg border dark:bg-gray-800 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
-            >
-            <select id="region-filter" class="p-3 rounded-lg border dark:bg-gray-800 dark:border-gray-700 outline-none">
-                <option value="">Filter by Region</option>
+        <div class="flex flex-col md:flex-row gap-4 mb-10">
+            <div class="relative flex-grow">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 opacity-40">🔍</span>
+                <input type="text" id="search-input" placeholder="Search by country name..." 
+                    class="w-full pl-12 pr-4 py-3 rounded-xl border-0 bg-white dark:bg-gray-800 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 focus:ring-2 focus:ring-blue-500 outline-none transition">
+            </div>
+            <select id="region-filter" class="md:w-60 p-3 rounded-xl border-0 bg-white dark:bg-gray-800 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer">
+                <option value="">All Regions</option>
                 <option value="africa">Africa</option>
                 <option value="americas">Americas</option>
                 <option value="asia">Asia</option>
@@ -40,18 +43,25 @@
             </select>
         </div>
 
-        <div id="skeleton-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 hidden">
-            <div class="h-80 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"></div>
-            <div class="h-80 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"></div>
-            <div class="h-80 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"></div>
-            <div class="h-80 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"></div>
-        </div>
-
-        <div id="country-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div id="skeleton-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden h-80 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700">
+                <div class="h-40 skeleton"></div>
+                <div class="p-6 space-y-4">
+                    <div class="h-6 w-3/4 skeleton rounded-md"></div>
+                    <div class="space-y-2">
+                        <div class="h-3 w-1/2 skeleton rounded-md"></div>
+                        <div class="h-3 w-2/3 skeleton rounded-md"></div>
+                    </div>
+                </div>
+            </div>
             </div>
 
+        <div id="country-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 hidden"></div>
+
         <div id="error-msg" class="hidden text-center py-20">
-            <p class="text-2xl font-semibold opacity-50">No countries found. Try another search! 🔍</p>
+            <div class="text-6xl mb-4 text-gray-300">🗺️</div>
+            <h3 class="text-xl font-bold opacity-60">No countries match your criteria</h3>
+            <p class="opacity-40">Try adjusting your filters or search terms.</p>
         </div>
     </main>
 
